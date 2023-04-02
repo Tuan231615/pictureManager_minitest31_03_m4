@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/create-picture">Create new picture</a>
+<form>
+    <input name="search" type="text"/>
+    <select name="searchSearch" th:object="${catalogs}">
+        <option th:each="c :${catalogs}" th:value="${c.c_id}" th:text="${c.name}"></option>
+    </select>
+    <button type="submit">SEARCH</button>
+</form>
+<h1>Pictures</h1>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Code</th>
+        <th>Height</th>
+        <th>Wide</th>
+        <th>Material</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Catalog</th>
+        <th>View</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <th:block th:each="picture : ${pictures}">
+        <tr>
+            <td th:text="${picture.id}"></td>
+            <td th:text="${picture.code}"></td>
+            <td th:text="${picture.height}"></td>
+            <td th:text="${picture.wide}"></td>
+            <td th:text="${picture.material}"></td>
+            <td th:text="${picture.description}"></td>
+            <td th:text="${picture.price}"></td>
+            <td th:if="${picture.catalog}" th:text="${picture.catalog.name}"></td>
+            <td th:unless="${picture.catalog}"></td>
+            <td><a th:href="@{/view/__${picture.id}__ }">View</a></td>
+            <td><a th:href="@{/edit-picture/__${picture.id}__ }">Edit</a></td>
+            <td><a th:href="@{/delete-picture/__${picture.id}__ }">Delete</a></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>

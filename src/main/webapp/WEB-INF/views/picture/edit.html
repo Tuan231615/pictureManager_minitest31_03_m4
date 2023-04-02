@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Picture</title>
+</head>
+<body>
+<p>
+    <a href="/pictures">
+        List Picture
+    </a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/edit-picture}" th:object="${picture}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Code</td>
+            <td><input type="text" th:field="*{code}" ></td>
+        </tr>
+        <tr>
+            <td>Height</td>
+            <td><input type="text" th:field="*{height}" ></td>
+        </tr>
+        <tr>
+            <td>wide</td>
+            <td><input type="text" th:field="*{wide}" ></td>
+        </tr>
+        <tr>
+            <td>Material</td>
+            <td><input type="text" th:field="*{material}" ></td>
+        </tr>
+        <tr>
+            <td>description</td>
+            <td><input type="text" th:field="*{description}" ></td>
+        </tr>
+        <tr>
+            <td>price</td>
+            <td><input type="text" th:field="*{price}" ></td>
+        </tr>
+        <tr>
+            <td>Catalog</td>
+            <td>
+                <select name="catalog">
+                    <option th:each="c : ${catalogs}"
+                            th:value="${c.c_id}"
+                            th:text="${c.name}"
+                            th:selected="(${picture.catalog}) and (${c.c_id} == *{catalog.c_id})"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Update picture"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

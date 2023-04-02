@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create picture</title>
+</head>
+<body>
+<h1>Create picture</h1>
+<p>
+    <a href="/pictures">Picture list</a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/create-picture}" th:object="${picture}" method="post">
+    <table>
+        <tr>
+            <td>Code</td>
+            <td><input type="text" th:field="*{code}" ></td>
+        </tr>
+        <tr>
+            <td>Height</td>
+            <td><input type="text" th:field="*{height}" ></td>
+        </tr>
+        <tr>
+            <td>wide</td>
+            <td><input type="text" th:field="*{wide}" ></td>
+        </tr>
+        <tr>
+            <td>Material</td>
+            <td><input type="text" th:field="*{material}" ></td>
+        </tr>
+        <tr>
+            <td>description</td>
+            <td><input type="text" th:field="*{description}" ></td>
+        </tr>
+        <tr>
+            <td>price</td>
+            <td><input type="text" th:field="*{price}" ></td>
+        </tr>
+        <tr>
+            <td>Catalog:</td>
+            <td>
+                <select th:field="*{catalog}">
+                    <option th:each="c : ${catalogs}" th:value="${c.c_id}" th:text="${c.name}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Create picture"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
