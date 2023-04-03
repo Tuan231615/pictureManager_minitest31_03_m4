@@ -1,4 +1,4 @@
-package com.codegym;
+package com.codegym.validator;
 
 import com.codegym.model.Picture;
 import org.springframework.validation.Errors;

@@ -12,7 +12,7 @@
 <th:block th:if="${message}">
     <p th:text="${message}"></p>
 </th:block>
-<form th:action="@{/create-picture}" th:object="${picture}" method="post">
+<form th:action="@{/create-picture}" th:object="${picture}" method="post" enctype="multipart/form-data">
     <table>
         <tr>
             <td>Code</td>
@@ -45,6 +45,10 @@
                     <option th:each="c : ${catalogs}" th:value="${c.c_id}" th:text="${c.name}"></option>
                 </select>
             </td>
+        </tr>
+        <tr>
+            <td>Image</td>
+            <input type="file" th:field="*{image}"/>
         </tr>
         <tr>
             <td></td>

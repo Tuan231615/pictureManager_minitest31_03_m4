@@ -1,48 +1,22 @@
 package com.codegym.model;
 
-import org.springframework.validation.Validator;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.*;
-import javax.validation.constraints.Min;
-import java.awt.*;
-
-@Entity
-public class Picture {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class PictureForm {
     private Long id;
     private String code;
     private String height;
     private String wide;
     private String material;
     private String description;
-    @Min(0)
     private double price;
-    @ManyToOne
-    @JoinColumn(name = "c_id")
     private Catalog catalog;
-    private String image;
+    private MultipartFile image;
 
-    public void setId(Long id) {
-        this.id = id;
+    public PictureForm() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public Picture() {
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public Picture(Long id, String code, String height, String wide, String material, String description, double price, Catalog catalog, String image) {
+    public PictureForm(Long id, String code, String height, String wide, String material, String description, double price, Catalog catalog, MultipartFile image) {
         this.id = id;
         this.code = code;
         this.height = height;
@@ -54,13 +28,12 @@ public class Picture {
         this.image = image;
     }
 
-    public Picture(String code, String height, String wide, String material, String description, double price) {
-        this.code = code;
-        this.height = height;
-        this.wide = wide;
-        this.material = material;
-        this.description = description;
-        this.price = price;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCode() {
@@ -119,10 +92,11 @@ public class Picture {
         this.catalog = catalog;
     }
 
-    @Override
-    public String toString() {
-        return String.format("Picture[id=%d, code='%s', height='%s', wide='%s', material='%s', description='%s', price='%s']",
-                id, code, height, wide, material, description, price);
+    public MultipartFile getImage() {
+        return image;
     }
 
+    public void setImage(MultipartFile image) {
+        this.image = image;
+    }
 }

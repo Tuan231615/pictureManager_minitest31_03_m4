@@ -26,6 +26,7 @@
         <th>Description</th>
         <th>Price</th>
         <th>Catalog</th>
+        <th>Image</th>
         <th>View</th>
         <th>Edit</th>
         <th>Delete</th>
@@ -41,6 +42,7 @@
             <td th:text="${picture.price}"></td>
             <td th:if="${picture.catalog}" th:text="${picture.catalog.name}"></td>
             <td th:unless="${picture.catalog}"></td>
+            <td><img width="100" height="100" th:src="@{'/image/' + ${picture.image}}" alt=""></td>
             <td><a th:href="@{/view/__${picture.id}__ }">View</a></td>
             <td><a th:href="@{/edit-picture/__${picture.id}__ }">Edit</a></td>
             <td><a th:href="@{/delete-picture/__${picture.id}__ }">Delete</a></td>
