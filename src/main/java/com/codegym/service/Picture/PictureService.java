@@ -20,6 +20,12 @@ public class PictureService implements IPictureService {
     public Page<Picture> findAll(Pageable pageable) {
         return pictureRepository.findAll(pageable);
     }
+
+    @Override
+    public Page<Picture> findAllByCodeAndCatalog(String code, Optional<Catalog> catalog, Pageable pageable) {
+        return pictureRepository.findAllByCodeAndCatalog(code, catalog, pageable);
+    }
+
     @Override
     public Iterable<Picture> findAll() {
         return pictureRepository.findAll();

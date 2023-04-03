@@ -42,7 +42,7 @@ public class PictureController {
     public ModelAndView listPictures(@RequestParam("search") Optional<String> search, @RequestParam("searchSearch") Optional<Catalog> catalog, Pageable pageable) {
         Page<Picture> picturePage;
         if (search.isPresent()){
-            picturePage = pictureService.findAllByCatalog(catalog ,pageable);
+            picturePage = pictureService.findAllByCodeAndCatalog(search.get(), catalog ,pageable);
         }else {
             picturePage = pictureService.findAll(pageable);
         }

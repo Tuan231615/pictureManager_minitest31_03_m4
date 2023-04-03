@@ -1,6 +1,9 @@
 package com.codegym.model;
 
+import org.springframework.validation.Validator;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 @Entity
 public class Picture {
@@ -12,6 +15,7 @@ public class Picture {
     private String wide;
     private String material;
     private String description;
+    @Min(0)
     private double price;
     @ManyToOne
     @JoinColumn(name = "c_id")
