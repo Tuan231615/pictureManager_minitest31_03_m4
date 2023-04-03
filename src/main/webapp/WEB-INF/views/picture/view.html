@@ -10,7 +10,8 @@
     Back to list picture
   </a>
 </p>
-<table>
+<form th:object="${picture}">
+<table border="1">
   <tr>
     <th>ID</th>
     <th>Code</th>
@@ -33,5 +34,6 @@
     <td th:unless="${picture.catalog}"></td>
   </tr>
 </table>
+</form>
 </body>
 </html>

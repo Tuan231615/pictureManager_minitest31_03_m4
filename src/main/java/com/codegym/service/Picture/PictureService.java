@@ -5,6 +5,8 @@ import com.codegym.model.Picture;
 import com.codegym.repository.IPictureRepository;
 import com.sun.org.apache.bcel.internal.classfile.Code;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,6 +14,12 @@ import java.util.Optional;
 public class PictureService implements IPictureService {
     @Autowired
     private IPictureRepository pictureRepository;
+
+
+    @Override
+    public Page<Picture> findAll(Pageable pageable) {
+        return pictureRepository.findAll(pageable);
+    }
     @Override
     public Iterable<Picture> findAll() {
         return pictureRepository.findAll();
@@ -33,12 +41,8 @@ public class PictureService implements IPictureService {
     }
 
     @Override
-    public Iterable<Picture> findAllByCode(Code code) {
-        return null;
+    public Page<Picture> findAllByCatalog(Optional<Catalog> catalog, Pageable pageable) {
+        return pictureRepository.findAllByCatalog(catalog, pageable);
     }
 
-    @Override
-    public Iterable<Picture> findAllByCatalog(Optional<Catalog> catalog) {
-        return pictureRepository.findAllByCatalog(catalog);
-    }
 }

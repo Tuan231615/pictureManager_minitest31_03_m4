@@ -4,11 +4,13 @@ import com.codegym.model.Catalog;
 import com.codegym.model.Picture;
 import com.codegym.service.Catalog.ICatalogService;
 import com.codegym.service.Picture.IPictureService;
-import com.sun.tools.javac.jvm.Code;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import java.util.Optional;
 
@@ -37,13 +39,15 @@ public class PictureController {
         return modelAndView;
     }
     @GetMapping("/pictures")
-    public ModelAndView listPictures(@RequestParam("search") Optional<String> search, @RequestParam Optional<Catalog> catalog){
-        Iterable<Picture> pictures = pictureService.findAll();
+    public ModelAndView listPictures(@RequestParam("search") Optional<String> search, @RequestParam("searchSearch") Optional<Catalog> catalog, Pageable pageable) {
+        Page<Picture> picturePage;
         if (search.isPresent()){
-            pictures = pictureService.findAllByCatalog(catalog);
+            picturePage = pictureService.findAllByCatalog(catalog ,pageable);
+        }else {
+            picturePage = pictureService.findAll(pageable);
         }
         ModelAndView modelAndView = new ModelAndView("/picture/list");
-        modelAndView.addObject("pictures", pictures);
+        modelAndView.addObject("pictures", picturePage);
         return modelAndView;
     }
     @GetMapping("/edit-picture/{id}")
@@ -86,7 +90,7 @@ public class PictureController {
         return "redirect:pictures";
     }
 
-    @GetMapping("/view")
+    @GetMapping("/view-picture")
     public ModelAndView view(@RequestParam("id") Picture picture){
         ModelAndView modelAndView = new ModelAndView("/picture/view");
         modelAndView.addObject("picture", picture);
